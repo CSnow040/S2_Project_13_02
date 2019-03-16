@@ -34,17 +34,40 @@
 */
 window.onload = init;
 
-
+//creates the init function to make the buttons clickable
 function init() {
       var calcButtons = document.getElementsByClassName("calcButtons");
-      for (var i = 0; i < array.length; i++) {
-
+      for (var i = 0; i < calcButtons.length; i++) {
+            calcButtons[i].onclick = buttonClick;
       }
-      calcKeys();
-
-      document.getElementById("calcWindow")
+      document.getElementById("calcWindows").onkeydown = calcKeys;
 }
 
+//gives feedback in the calculator window when a button is clicked
+function buttonClick(e) {
+      var calcValue = document.getElementById("calcWindow").value;
+      var calcDecimal = document.getElementById("deciamls").value;
+      var buttonValue = e.target.value;
+
+      switch (buttonValue) {
+            case "del":
+                  calcValue = "";
+                  break;
+            case "bksp":
+                  calcValue = eraseChar(calcValue);
+                  break;
+            case "enter":
+                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n"
+                  break;
+            case "prev":
+                  calcValue = lastEq(calcValue);
+                  break;
+            default:
+                  calcvalue += buttonValue;
+                  break;
+      }
+      var calcWindow = document.getElementById("calcValue").value;
+}
 
 
 
