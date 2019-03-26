@@ -36,11 +36,13 @@ window.onload = init;
 
 //creates the init function to make the buttons clickable
 function init() {
-      var calcButtons = document.getElementsByClassName("calcButtons");
+      var calcButtons = document.getElementsByClassName("calcButton");
+
       for (var i = 0; i < calcButtons.length; i++) {
             calcButtons[i].onclick = buttonClick;
       }
-      document.getElementById("calcWindows").onkeydown = calcKeys;
+
+      document.getElementById("calcWindow").onkeydown = calcKeys;
 }
 
 //gives feedback in the calculator window when a button is clicked
@@ -57,19 +59,36 @@ function buttonClick(e) {
                   calcValue = eraseChar(calcValue);
                   break;
             case "enter":
-                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n"
+                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n";
                   break;
             case "prev":
-                  calcValue = lastEq(calcValue);
+                  calcValue += lastEq(calcValue);
                   break;
             default:
-                  calcvalue += buttonValue;
+                  calcValue += buttonValue;
                   break;
       }
-      var calcWindow = document.getElementById("calcValue").value;
+      document.getElementById("calcWindow").value = calcValue;
+      document.getElementById("calcWindow").focus();
 }
 
+function calcKeys(e) {
+      var calcValue = document.getElementById("calcWindow").value;
+      var calcDecimal = document.getElementById("decimals").value;
 
+      switch (e.key) {
+            case "Delete":
+                  calcValue = "";
+                  break;
+            case "Enter":
+                  calcValue += " = " + evalEq(calcValue, calcDecimal);
+                  break;
+            case "ArrowUp":
+                  calcValue += lastEq(calcWindow.value);
+                  e.preventDefault();
+      }
+      document.getElementById("calcWindow").value = calcValue;
+}
 
 /* ===================================================================== */
 
