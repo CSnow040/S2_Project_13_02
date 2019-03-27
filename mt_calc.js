@@ -36,21 +36,24 @@ window.onload = init;
 
 //creates the init function to make the buttons clickable
 function init() {
+      //this variable puts all of the information of the HTML into prespective for the javascript
       var calcButtons = document.getElementsByClassName("calcButton");
 
+      //this for loop is used to apply the method of clicking any button on the calculator to put that number or phrase in the window
       for (var i = 0; i < calcButtons.length; i++) {
             calcButtons[i].onclick = buttonClick;
       }
-
+      //this document variable makes it so that when you press any key down on the calculator or on your keyboard it shows up in the calculator window
       document.getElementById("calcWindow").onkeydown = calcKeys;
 }
 
-//gives feedback in the calculator window when a button is clicked
+//gives feedback in the calculator window when a button is clicked and makes the phrases (text strings) then takes the action it was assigned in the switch case
 function buttonClick(e) {
       var calcValue = document.getElementById("calcWindow").value;
       var calcDecimal = document.getElementById("decimals").value;
       var buttonValue = e.target.value;
 
+      //this switch case is used to give each button that has a specific label a specific function
       switch (buttonValue) {
             case "del":
                   calcValue = "";
@@ -68,14 +71,17 @@ function buttonClick(e) {
                   calcValue += buttonValue;
                   break;
       }
+      //these document varibles use the value method to put do the specific function in the calculators comment window
       document.getElementById("calcWindow").value = calcValue;
       document.getElementById("calcWindow").focus();
 }
 
+//This function is used to make each button do its specific event such as delete, backspace, and previous
 function calcKeys(e) {
       var calcValue = document.getElementById("calcWindow").value;
       var calcDecimal = document.getElementById("decimals").value;
 
+      //this switch case does the same thing but allows the user to use the keyboard to type the equation out
       switch (e.key) {
             case "Delete":
                   calcValue = "";
@@ -87,6 +93,7 @@ function calcKeys(e) {
                   calcValue += lastEq(calcWindow.value);
                   e.preventDefault();
       }
+      //this document variable is used to put the swtich case into action
       document.getElementById("calcWindow").value = calcValue;
 }
 
