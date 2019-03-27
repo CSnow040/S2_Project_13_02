@@ -48,7 +48,7 @@ function init() {
 //gives feedback in the calculator window when a button is clicked
 function buttonClick(e) {
       var calcValue = document.getElementById("calcWindow").value;
-      var calcDecimal = document.getElementById("deciamls").value;
+      var calcDecimal = document.getElementById("decimals").value;
       var buttonValue = e.target.value;
 
       switch (buttonValue) {
